@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { LoginPageContainer } from "./styled";
-import Header from "@/component/common/Header";
 import { Button, Typography } from "@mui/material";
 import PasswordTextField from "@/component/common/PasswordField";
 import TextField from "@/component/common/TextField";
@@ -19,16 +18,24 @@ const LoginPage = () => {
 
   return (
     <LoginPageContainer>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          marginTop: "10vh",
+        }}
+      >
         <Typography
           sx={{
             fontSize: "34px",
             fontWeight: "600",
-            marginTop: "10vh",
+            marginRight: "15px",
           }}
         >
           Job Fair Interview Booking
         </Typography>
+        <img src="logo.png" width={75} height={75} />
       </div>
       <div
         style={{
@@ -36,7 +43,8 @@ const LoginPage = () => {
           gap: "16px",
           flexDirection: "column",
           alignItems: "center",
-          marginTop: "20vh",
+          marginTop: "15vh",
+          minWidth: "366px",
         }}
       >
         <Typography

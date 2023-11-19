@@ -6,4 +6,5 @@ export interface IUserContext {
   isLogin: boolean;
   setIsLogin: (isLogin: boolean) => void;
   logout: () => void;
+  loading: boolean;
 }

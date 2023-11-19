@@ -16,7 +16,12 @@ export const Title = styled(Typography)`
 `;
 
 export const SignInButton = styled(Button)`
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  border-radius: 8px;
   ${({ theme }) => `
-    color: ${theme.palette.text.primary}
+    color: ${theme.palette.text.primary};
+    background: ${theme.palette.info.main};
 `}
 `;

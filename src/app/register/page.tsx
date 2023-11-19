@@ -11,27 +11,35 @@ const RegisterPage = () => {
   const {
     username,
     password,
-    conFirmPassword,
-    role,
+    name,
+    tel,
     handleSubmit,
     handleUsernameChange,
     handlePasswordChange,
-    handleConFirmPasswordChange,
-    handleRoleChange,
+    handleNameChange,
+    handleTelChange,
   } = useRegisterForm();
 
   return (
     <RegisterPageContainer>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          marginTop: "10vh",
+        }}
+      >
         <Typography
           sx={{
             fontSize: "34px",
             fontWeight: "600",
-            marginTop: "10vh",
+            marginRight: "15px",
           }}
         >
           Job Fair Interview Booking
         </Typography>
+        <img src="logo.png" width={75} height={75} />
       </div>
       <div
         style={{
@@ -39,7 +47,8 @@ const RegisterPage = () => {
           gap: "16px",
           flexDirection: "column",
           alignItems: "center",
-          marginTop: "20vh",
+          marginTop: "15vh",
+          minWidth: "366px",
         }}
       >
         <Typography
@@ -48,14 +57,28 @@ const RegisterPage = () => {
             fontWeight: "600",
           }}
         >
-          Log In
+          Register
         </Typography>
+        <TextField
+          label="Name"
+          variant="outlined"
+          className="field"
+          value={name}
+          onChange={handleNameChange}
+        />
         <TextField
           label="Email"
           variant="outlined"
           className="field"
           value={username}
           onChange={handleUsernameChange}
+        />
+        <TextField
+          label="Tel"
+          variant="outlined"
+          className="field"
+          value={tel}
+          onChange={handleTelChange}
         />
         <PasswordTextField
           label="Password"
@@ -77,12 +100,12 @@ const RegisterPage = () => {
             handleSubmit();
           }}
         >
-          Log In
+          Register
         </Button>
         <Typography sx={{ color: "rgba(0, 0, 0, 0.60)" }}>
-          Don’t have account?{" "}
-          <Link href={"/register"} style={{ textDecoration: "underline" }}>
-            Register
+          Already have account?{" "}
+          <Link href={"/login"} style={{ textDecoration: "underline" }}>
+            Login
           </Link>
         </Typography>
       </div>

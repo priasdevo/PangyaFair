@@ -2,14 +2,17 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useSnackbar } from "@/context/snackbarContext";
 import { useUser } from "@/context/userContext";
+import { useApi } from "@/context/apiContext";
 
 const useRegisterForm = () => {
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
+  const [tel, setTel] = useState("");
   const [password, setPassword] = useState("");
-  const [conFirmPassword, setConFirmPassword] = useState("");
-  const [role, setRole] = useState("customer");
+
   const { displaySnackbar } = useSnackbar();
   const { setIsLogin, setEmail } = useUser();
+  const { sendRequest } = useApi();
   const router = useRouter();
 
   const handleSubmit = async () => {
@@ -21,33 +24,21 @@ const useRegisterForm = () => {
       displaySnackbar("Password is required", "error");
       return;
     }
-    if (password.trim() !== conFirmPassword.trim()) {
-      displaySnackbar("Password is not match", "error");
-      return;
-    }
+
     try {
       const req = {
-        username: username,
+        name: name,
+        email: username,
+        tel: tel,
         password: password,
-        role: role,
       };
-      const res = await fetch(
-        process.env["NEXT_PUBLIC_GATEWAY_URL"] + "/user/auth/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(req),
-        }
-      );
 
-      const data = await res.json();
+      const data = await sendRequest("POST", req, "/api/v1/auth/register");
 
       if (!data.success) {
         displaySnackbar("This username is already taken", "error");
       } else {
-        router.push("/");
+        router.push("/login");
         localStorage.setItem("token", data.token);
         setIsLogin(true);
         setEmail(username);
@@ -65,26 +56,24 @@ const useRegisterForm = () => {
     setPassword(event.target.value);
   };
 
-  const handleConFirmPasswordChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setConFirmPassword(event.target.value);
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
   };
 
-  const handleRoleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRole(event.target.value);
+  const handleTelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTel(event.target.value);
   };
 
   return {
     username,
     password,
-    conFirmPassword,
-    role,
+    name,
+    tel,
     handleSubmit,
     handleUsernameChange,
     handlePasswordChange,
-    handleConFirmPasswordChange,
-    handleRoleChange,
+    handleNameChange,
+    handleTelChange,
   };
 };
 

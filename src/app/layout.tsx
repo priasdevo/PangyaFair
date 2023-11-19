@@ -3,7 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@mui/material";
 import theme from "@/common/theme/theme";
-import Header from "@/component/common/Header";
+import { SnackbarProvider } from "@/context/snackbarContext";
+import { UserProvider } from "@/context/userContext";
+import { ApiProvider } from "@/context/apiContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,10 +21,16 @@ export default function RootLayout({
 }) {
   console.log("Prias theme : ", theme);
   return (
-    <ThemeProvider theme={theme}>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
-      </html>
-    </ThemeProvider>
+    <html lang="en">
+      <SnackbarProvider>
+        <ApiProvider>
+          <UserProvider>
+            <ThemeProvider theme={theme}>
+              <body className={inter.className}>{children}</body>
+            </ThemeProvider>
+          </UserProvider>
+        </ApiProvider>
+      </SnackbarProvider>
+    </html>
   );
 }
