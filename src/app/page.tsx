@@ -12,6 +12,7 @@ import useAllCompanyCard from "@/hooks/useAllCompanyCard";
 import { useUser } from "@/context/userContext";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import CreateCompanyBox from "@/component/admin/CreateCompanyBox";
 
 export default function Home() {
   const { allCompany } = useAllCompanyCard();
@@ -28,7 +29,7 @@ export default function Home() {
     <HomeContainer>
       <Header />
       <ContentContainer>
-        <CompanyCardContainer>
+        <CompanyCardContainer style={{ width: isAdmin ? "60vw" : "100%" }}>
           {allCompany &&
             allCompany.length !== 0 &&
             allCompany.map((company, index) => {
@@ -43,6 +44,7 @@ export default function Home() {
               );
             })}
         </CompanyCardContainer>
+        {isAdmin && <CreateCompanyBox />}
       </ContentContainer>
     </HomeContainer>
   );

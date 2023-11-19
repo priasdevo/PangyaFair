@@ -16,6 +16,7 @@ export const UserProvider = ({ children }: React.PropsWithChildren<{}>) => {
 
   useEffect(() => {
     const validateToken = async () => {
+      console.log("Prias token : ", token);
       try {
         const res = await fetch("http://localhost:5000/api/v1/auth/me", {
           method: "GET",
@@ -39,7 +40,12 @@ export const UserProvider = ({ children }: React.PropsWithChildren<{}>) => {
 
     if (token) validateToken();
     else {
-      setLoading(false);
+      const nToken = localStorage.getItem("token");
+      if (nToken) {
+        setToken(nToken);
+      } else {
+        setLoading(false);
+      }
     }
   }, [token]);
 

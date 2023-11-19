@@ -10,8 +10,9 @@ export const HomeContainer = styled("div")`
 export const ContentContainer = styled("div")`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  width: 100%;
   padding: 15px 30px;
 `;
 
