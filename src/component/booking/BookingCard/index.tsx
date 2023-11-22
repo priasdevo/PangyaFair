@@ -19,7 +19,7 @@ const BookingCard = (props: BookingCardProps) => {
         Interview Date : {dayjs(date).format("DD-MM-YYYY")}
       </Typography>
       <ActionBar>
-        <button style={{ borderRadius: "4px", height: "100%" }}>
+        <button style={{ borderRadius: "4px", height: "100%", border: "none" }}>
           <BorderColorOutlinedIcon fontSize="medium" />
         </button>
         <button
