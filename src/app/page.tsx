@@ -1,20 +1,21 @@
-"use client";
-import Image from "next/image";
-import styles from "./page.module.css";
-import Header from "@/component/common/Header";
-import CompanyCard from "@/component/common/CompanyCard";
+'use client'
+import Image from 'next/image'
+import styles from './page.module.css'
+import Header from '@/component/common/Header'
+import CompanyCard from '@/component/common/CompanyCard'
 import {
   CompanyCardContainer,
   ContentContainer,
   HomeContainer,
-} from "./styled";
-import useAllCompanyCard from "@/hooks/useAllCompanyCard";
-import { useUser } from "@/context/userContext";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import CreateCompanyBox from "@/component/admin/CreateCompanyBox";
-import Modal from "@/component/common/Modal";
-import { Typography, useTheme } from "@mui/material";
+  ModalButton,
+} from './styled'
+import useAllCompanyCard from '@/hooks/useAllCompanyCard'
+import { useUser } from '@/context/userContext'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import CreateCompanyBox from '@/component/admin/CreateCompanyBox'
+import Modal from '@/component/common/Modal'
+import { Typography, useTheme } from '@mui/material'
 
 export default function Home() {
   const {
@@ -25,25 +26,25 @@ export default function Home() {
     delted_name,
     onModalCancelHandle,
     onModalConfirmHandle,
-  } = useAllCompanyCard();
-  const { isLogin, role, loading } = useUser();
-  const router = useRouter();
+  } = useAllCompanyCard()
+  const { isLogin, role, loading } = useUser()
+  const router = useRouter()
   useEffect(() => {
     if (!isLogin && !loading) {
-      router.replace("/login");
+      router.replace('/login')
     }
-  }, [isLogin, loading]);
+  }, [isLogin, loading])
   useEffect(() => {
-    console.log("Prias allcompany : ", allCompany);
-  }, [allCompany]);
-  const isAdmin = role === "admin";
-  const theme = useTheme();
+    console.log('Prias allcompany : ', allCompany)
+  }, [allCompany])
+  const isAdmin = role === 'admin'
+  const theme = useTheme()
 
   return (
     <HomeContainer>
       <Header />
       <ContentContainer>
-        <CompanyCardContainer style={{ width: isAdmin ? "60vw" : "100%" }}>
+        <CompanyCardContainer style={{ width: isAdmin ? '60vw' : '100%' }}>
           {allCompany &&
             allCompany.length !== 0 &&
             allCompany.map((company, index) => {
@@ -56,7 +57,7 @@ export default function Home() {
                   companyId={company.id}
                   onDeleteClick={onDelClikcHandle}
                 />
-              );
+              )
             })}
         </CompanyCardContainer>
         {isAdmin && <CreateCompanyBox getAllCompany={getAllCompany} />}
@@ -67,44 +68,32 @@ export default function Home() {
         </Typography>
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-around",
-            width: "100%",
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            width: '100%',
           }}
         >
-          <button
+          <ModalButton
             style={{
               backgroundColor: theme.palette.secondary.dark,
               color: theme.palette.text.secondary,
-              padding: "10px 14px",
-              borderRadius: "12px",
-              boxShadow: "none",
-              border: "none",
-              minWidth: "121px",
-              cursor: "pointer",
             }}
             onClick={onModalCancelHandle}
           >
             Cancel
-          </button>
-          <button
+          </ModalButton>
+          <ModalButton
             style={{
               backgroundColor: theme.palette.primary.main,
               color: theme.palette.text.secondary,
-              padding: "10px 14px",
-              borderRadius: "12px",
-              boxShadow: "none",
-              border: "none",
-              minWidth: "121px",
-              cursor: "pointer",
             }}
             onClick={onModalConfirmHandle}
           >
             Confirm
-          </button>
+          </ModalButton>
         </div>
       </Modal>
     </HomeContainer>
-  );
+  )
 }
