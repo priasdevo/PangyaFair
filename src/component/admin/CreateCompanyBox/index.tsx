@@ -1,31 +1,15 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CreateCompanyContainer } from './styled'
-import { Typography, useTheme } from '@mui/material'
+import { FormControl, Typography, useTheme } from '@mui/material'
 import TextField from '@/component/common/TextField'
 import useCreateCompany from '@/hooks/useCreateCompany'
 import ApplyButton from '@/component/common/ApplyButton'
+import Modal from '@/component/common/Modal'
 
 const CreateCompanyBox = (props: { getAllCompany: () => {} }) => {
   const { getAllCompany } = props
-  const {
-    name,
-    address,
-    business,
-    province,
-    postalcode,
-    tel,
-    picture,
-    handleNameChange,
-    handleAddressChange,
-    handleBusinessChange,
-    handlePictureChange,
-    handlePostalcodeChange,
-    handleTelChange,
-    handleProvinceChange,
-    handleSubmit,
-    success,
-  } = useCreateCompany()
+  const { handleFormSubmit, success } = useCreateCompany()
 
   useEffect(() => {
     if (success) {
@@ -33,69 +17,68 @@ const CreateCompanyBox = (props: { getAllCompany: () => {} }) => {
     }
   }, [success])
 
-  const theme = useTheme()
+  const [formData, setFormData] = useState({
+    name: '',
+    address: '',
+    business: '',
+    province: '',
+    postalcode: '',
+    tel: '',
+    picture: '',
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prevState) => ({ ...prevState, [name]: value }))
+  }
+
+  // Modified submit handler
+  const handleFormSubmitM = (e) => {
+    console.log('Prias submit click')
+    e.preventDefault()
+    handleFormSubmit(formData) // Assuming handleSubmit can take formData as argument
+  }
+
+  const fields = [
+    { label: 'Company Name', name: 'name' },
+    { label: 'Business', name: 'business' },
+    { label: 'Address', name: 'address' },
+    { label: 'Province', name: 'province' },
+    { label: 'Postal Code', name: 'postalcode' },
+    { label: 'Telephone No', name: 'tel' },
+    { label: 'Picture Link', name: 'picture' },
+  ]
+
   return (
     <CreateCompanyContainer>
       <Typography variant="h6" sx={{ alignSelf: 'center' }}>
         New Company
       </Typography>
-      <label>Company Name :</label>
-      <TextField
-        sx={{ background: '#D9D9D9' }}
-        variant="outlined"
-        className="field"
-        value={name}
-        onChange={handleNameChange}
-      />
-      <label>Business :</label>
-      <TextField
-        sx={{ background: '#D9D9D9' }}
-        variant="outlined"
-        className="field"
-        value={business}
-        onChange={handleBusinessChange}
-      />
-      <label>Address :</label>
-      <TextField
-        sx={{ background: '#D9D9D9' }}
-        variant="outlined"
-        className="field"
-        value={address}
-        onChange={handleAddressChange}
-      />
-      <label>Province :</label>
-      <TextField
-        sx={{ background: '#D9D9D9' }}
-        variant="outlined"
-        className="field"
-        value={province}
-        onChange={handleProvinceChange}
-      />
-      <label>Postal code :</label>
-      <TextField
-        sx={{ background: '#D9D9D9' }}
-        variant="outlined"
-        className="field"
-        value={postalcode}
-        onChange={handlePostalcodeChange}
-      />
-      <label>Telephone No :</label>
-      <TextField
-        sx={{ background: '#D9D9D9' }}
-        variant="outlined"
-        className="field"
-        value={tel}
-        onChange={handleTelChange}
-      />
-      <label>Picture Link :</label>
-      <TextField
-        sx={{ background: '#D9D9D9' }}
-        variant="outlined"
-        className="field"
-        value={picture}
-        onChange={handlePictureChange}
-      />
-      <ApplyButton onClick={handleSubmit}>CREATE</ApplyButton>
+      <FormControl
+        onSubmit={handleFormSubmitM}
+        sx={{ display: 'flex', gap: '8px' }}
+      >
+        {fields.map((field, index) => (
+          <div key={index}>
+            <label>{field.label} :</label>
+            <TextField
+              sx={{ background: '#D9D9D9', marginTop: '6px' }}
+              variant="outlined"
+              className="field"
+              name={field.name}
+              value={formData[field.name]}
+              onChange={handleChange}
+            />
+          </div>
+        ))}
+        <ApplyButton
+          onClick={(e) => {
+            handleFormSubmitM(e)
+          }}
+        >
+          CREATE
+        </ApplyButton>
+      </FormControl>
     </CreateCompanyContainer>
   )
 }

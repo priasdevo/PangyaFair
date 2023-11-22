@@ -15,7 +15,10 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import CreateCompanyBox from '@/component/admin/CreateCompanyBox'
 import Modal from '@/component/common/Modal'
-import { Typography, useTheme } from '@mui/material'
+import { FormControl, Typography, useTheme } from '@mui/material'
+import useCompanyEdit from '@/hooks/useCompanyEdit'
+import TextField from '@/component/common/TextField'
+import ApplyButton from '@/component/common/ApplyButton'
 
 export default function Home() {
   const {
@@ -29,6 +32,17 @@ export default function Home() {
   } = useAllCompanyCard()
   const { isLogin, role, loading } = useUser()
   const router = useRouter()
+  const {
+    formDataEdit,
+    handleChangeEdit,
+    handleFormSubmitEdit,
+    handleSelcteId,
+    success,
+    handleCancel,
+    isOpen,
+    fromDataFields,
+  } = useCompanyEdit()
+
   useEffect(() => {
     if (!isLogin && !loading) {
       router.replace('/login')
@@ -37,6 +51,11 @@ export default function Home() {
   useEffect(() => {
     console.log('Prias allcompany : ', allCompany)
   }, [allCompany])
+  useEffect(() => {
+    if (success) {
+      getAllCompany()
+    }
+  }, [success])
   const isAdmin = role === 'admin'
   const theme = useTheme()
 
@@ -56,6 +75,7 @@ export default function Home() {
                   companyImage={company.picture}
                   companyId={company.id}
                   onDeleteClick={onDelClikcHandle}
+                  onEditClick={handleSelcteId}
                 />
               )
             })}
@@ -93,6 +113,53 @@ export default function Home() {
             Confirm
           </ModalButton>
         </div>
+      </Modal>
+      <Modal isOpen={isOpen}>
+        <FormControl
+          onSubmit={handleFormSubmitEdit}
+          sx={{ display: 'flex', gap: '8px' }}
+        >
+          {fromDataFields.map((field, index) => (
+            <div key={index}>
+              <label>{field.label} :</label>
+              <TextField
+                sx={{ background: '#D9D9D9', marginTop: '6px' }}
+                variant="outlined"
+                className="field"
+                name={field.name}
+                value={formDataEdit[field.name]}
+                onChange={handleChangeEdit}
+              />
+            </div>
+          ))}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '8px',
+              width: '100%',
+              justifyContent: 'space-between',
+            }}
+          >
+            <ApplyButton
+              color="#BC6C25"
+              onClick={(e) => {
+                e.preventDefault()
+                handleCancel()
+              }}
+            >
+              Cancel
+            </ApplyButton>
+            <ApplyButton
+              onClick={(e) => {
+                e.preventDefault()
+                handleFormSubmitEdit()
+              }}
+            >
+              Edit
+            </ApplyButton>
+          </div>
+        </FormControl>
       </Modal>
     </HomeContainer>
   )

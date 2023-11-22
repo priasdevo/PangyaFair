@@ -1,9 +1,10 @@
 import { useTheme } from '@mui/material'
 
 interface ApplyButtonProps {
-  onClick?: () => void
+  onClick?: (() => void) | ((e: any) => void)
   children?: React.ReactNode
   isDisabled?: boolean
+  color?: string
 }
 const ApplyButton = (props: ApplyButtonProps) => {
   const theme = useTheme()
@@ -12,6 +13,8 @@ const ApplyButton = (props: ApplyButtonProps) => {
       style={{
         backgroundColor: props.isDisabled
           ? theme.palette.info.dark
+          : props.color
+          ? props.color
           : theme.palette.primary.dark,
         color: theme.palette.text.secondary,
         padding: '10px 14px',

@@ -12,10 +12,18 @@ interface cardProps {
   companyImage: string
   companyId: string
   onDeleteClick: (comp_id: string, comp_name: string) => void
+  onEditClick: (id: string) => void
 }
 
 const CompanyCard = (props: cardProps) => {
-  const { isAdmin, companyName, companyImage, companyId, onDeleteClick } = props
+  const {
+    isAdmin,
+    companyName,
+    companyImage,
+    companyId,
+    onDeleteClick,
+    onEditClick,
+  } = props
   const theme = useTheme()
   return (
     <CompanyCardContainer>
@@ -29,12 +37,15 @@ const CompanyCard = (props: cardProps) => {
         </Link>
         {isAdmin && (
           <ActionBar>
-            <ActionButton>
+            <ActionButton
+              onClick={() => {
+                onEditClick(companyId)
+              }}
+            >
               <BorderColorOutlinedIcon fontSize="medium" />
             </ActionButton>
             <ActionButton
               onClick={() => {
-                onDeleteClick(companyId, companyName)
                 onDeleteClick(companyId, companyName)
               }}
             >
