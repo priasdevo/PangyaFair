@@ -16,6 +16,10 @@ const useBooking = (id: string) => {
   const [name, setName] = useState("");
   const [date, setDate] = useState<Date>();
   const [bookings, setBookings] = useState<booking[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [delete_id, setDeleteId] = useState("");
+  const [delted_name, setDeletedName] = useState("");
+  const [delted_date, setDeletedDate] = useState<Date>();
   const { sendRequest } = useApi();
 
   const { company, getCompany } = useCompanyDetails();
@@ -70,6 +74,13 @@ const useBooking = (id: string) => {
     createBooking();
   };
 
+  const handleDeleteClick = (delId: string, delName: string, delDate: Date) => {
+    setDeleteId(delId);
+    setDeletedName(delName);
+    setDeletedDate(delDate);
+    setIsModalOpen(true);
+  };
+
   return {
     name,
     date,
@@ -77,6 +88,10 @@ const useBooking = (id: string) => {
     handleNameChange,
     handleDateChange,
     handleSubmit,
+    delted_name,
+    delted_date,
+    handleDeleteClick,
+    isModalOpen,
   };
 };
 

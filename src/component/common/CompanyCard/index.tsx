@@ -9,10 +9,12 @@ interface cardProps {
   companyName: string;
   companyImage: string;
   companyId: string;
+  onDeleteClick: (comp_id: string, comp_name: string) => void;
 }
 
 const CompanyCard = (props: cardProps) => {
-  const { isAdmin, companyName, companyImage, companyId } = props;
+  const { isAdmin, companyName, companyImage, companyId, onDeleteClick } =
+    props;
   const theme = useTheme();
   return (
     <CompanyCardContainer>
@@ -42,7 +44,12 @@ const CompanyCard = (props: cardProps) => {
             <button style={{ borderRadius: "4px", height: "100%" }}>
               <BorderColorOutlinedIcon fontSize="medium" />
             </button>
-            <button style={{ borderRadius: "4px", height: "100%" }}>
+            <button
+              style={{ borderRadius: "4px", height: "100%" }}
+              onClick={() => {
+                onDeleteClick(companyId, companyName);
+              }}
+            >
               <DeleteOutlineIcon fontSize="medium" />
             </button>
           </ActionBar>

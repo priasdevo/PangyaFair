@@ -8,9 +8,10 @@ interface BookingCardProps {
   name: string;
   date: Date;
   id: string;
+  onDeleteClick: (delId: string, delName: string, delDate: Date) => void;
 }
 const BookingCard = (props: BookingCardProps) => {
-  const { name, date } = props;
+  const { name, date, id, onDeleteClick } = props;
   return (
     <BookingCardContainer>
       <Typography variant="h6">Company Name : {name}</Typography>
@@ -21,7 +22,10 @@ const BookingCard = (props: BookingCardProps) => {
         <button style={{ borderRadius: "4px", height: "100%" }}>
           <BorderColorOutlinedIcon fontSize="medium" />
         </button>
-        <button style={{ borderRadius: "4px", height: "100%" }}>
+        <button
+          style={{ borderRadius: "4px", height: "100%" }}
+          onClick={() => onDeleteClick(id, name, date)}
+        >
           <DeleteOutlineIcon fontSize="medium" />
         </button>
       </ActionBar>

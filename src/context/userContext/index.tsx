@@ -27,7 +27,8 @@ export const UserProvider = ({ children }: React.PropsWithChildren<{}>) => {
         });
         const data = await res.json();
         if (data.success) {
-          setEmail(data.data.username);
+          console.log("Prias get current : ", data);
+          setEmail(data.data.email);
           setRole(data.data.role);
           setIsLogin(true);
         }
