@@ -34,9 +34,10 @@ const CompanyCard = (props: cardProps) => {
               border: "none",
               minWidth: "121px",
               cursor: "pointer",
+              fontWeight: "bolder",
             }}
           >
-            Apply
+            APPLY
           </button>
         </Link>
         {isAdmin && (

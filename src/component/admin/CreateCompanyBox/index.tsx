@@ -105,10 +105,11 @@ const CreateCompanyBox = (props: { getAllCompany: () => {} }) => {
           minWidth: "121px",
           alignSelf: "center",
           cursor: "pointer",
+          fontWeight: "bolder",
         }}
         onClick={handleSubmit}
       >
-        Apply
+        CREATE
       </button>
     </CreateCompanyContainer>
   );

@@ -41,9 +41,10 @@ const DetailsPage = ({ params }: { params: { id: string } }) => {
                 minWidth: "121px",
                 alignSelf: "flex-start",
                 cursor: "pointer",
+                fontWeight: "bolder",
               }}
             >
-              Apply
+              APPLY
             </button>
           </Link>
         </RightBox>

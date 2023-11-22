@@ -126,11 +126,12 @@ const ApplyPage = ({ params }: { params: { id: string } }) => {
                   minWidth: "121px",
                   alignSelf: "center",
                   cursor: "pointer",
+                  fontWeight: "bolder",
                 }}
                 onClick={handleSubmit}
                 disabled={bookings.length === 3}
               >
-                Apply
+                APPLY
               </button>
             </InterviewBookBox>
           )}
