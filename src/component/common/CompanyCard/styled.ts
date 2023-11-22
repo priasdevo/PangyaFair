@@ -1,6 +1,6 @@
-import { styled } from "@mui/material/styles";
+import { styled } from '@mui/material/styles'
 
-export const CompanyCardContainer = styled("div")`
+export const CompanyCardContainer = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,9 +11,9 @@ export const CompanyCardContainer = styled("div")`
   ${({ theme }) => `
     background: ${theme.palette.primary.main};
   `}
-`;
+`
 
-export const ActionBar = styled("div")`
+export const ActionBar = styled('div')`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -21,4 +21,12 @@ export const ActionBar = styled("div")`
   gap: 5px;
   width: 100%;
   height: 100%;
-`;
+`
+
+export const ActionButton = styled('button')`
+  border-radius: 4px;
+  height: 100%;
+  border: none;
+  padding: 4px;
+  background: white;
+`

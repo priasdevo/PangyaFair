@@ -1,10 +1,11 @@
 import React from 'react'
-import { ActionBar, CompanyCardContainer } from './styled'
+import { ActionBar, ActionButton, CompanyCardContainer } from './styled'
 import { Typography, useTheme } from '@mui/material'
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import Link from 'next/link'
 import ApplyButton from '../ApplyButton'
+
 interface cardProps {
   isAdmin: boolean
   companyName: string
@@ -28,17 +29,17 @@ const CompanyCard = (props: cardProps) => {
         </Link>
         {isAdmin && (
           <ActionBar>
-            <button style={{ borderRadius: '4px', height: '100%' }}>
+            <ActionButton>
               <BorderColorOutlinedIcon fontSize="medium" />
-            </button>
-            <button
-              style={{ borderRadius: '4px', height: '100%' }}
+            </ActionButton>
+            <ActionButton
               onClick={() => {
+                onDeleteClick(companyId, companyName)
                 onDeleteClick(companyId, companyName)
               }}
             >
               <DeleteOutlineIcon fontSize="medium" />
-            </button>
+            </ActionButton>
           </ActionBar>
         )}
       </ActionBar>
