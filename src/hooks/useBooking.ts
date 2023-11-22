@@ -3,6 +3,7 @@
 import { useApi } from '@/context/apiContext'
 import { useEffect, useState } from 'react'
 import useCompanyDetails from './useCompanyDetails'
+import dayjs from 'dayjs'
 
 interface booking {
   _id: string
@@ -64,7 +65,22 @@ const useBooking = (id: string) => {
     try {
       const response = await sendRequest(
         'DELETE',
-        { bookingDate: date },
+        {},
+        `/api/v1/bookings/${delete_id}`,
+      )
+      if (response.success) {
+        getBookings()
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  async function editBooking() {
+    try {
+      const response = await sendRequest(
+        'PUT',
+        { bookingDate: dayjs(delted_date).format('YYYY-MM-DD') },
         `/api/v1/bookings/${delete_id}`,
       )
       if (response.success) {
@@ -116,12 +132,16 @@ const useBooking = (id: string) => {
   }
 
   const handleCancelModal2 = () => {
-    setIsModalOpen(false)
+    setIsModalOpen2(false)
   }
 
-  const handleConfirmDelete2 = () => {
-    deleteBooking()
-    setIsModalOpen(false)
+  const handleConfirmEdit = () => {
+    editBooking()
+    setIsModalOpen2(false)
+  }
+
+  const handleDelDateChange = (date) => {
+    setDeletedDate(date)
   }
 
   return {
@@ -139,8 +159,9 @@ const useBooking = (id: string) => {
     handleConfirmDelete,
     handleEditClick,
     handleCancelModal2,
-    handleConfirmDelete2,
+    handleConfirmEdit,
     isModalOpen2,
+    handleDelDateChange,
   }
 }
 

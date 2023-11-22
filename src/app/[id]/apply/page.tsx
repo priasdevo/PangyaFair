@@ -6,6 +6,7 @@ import {
   BookingBox,
   InterviewBookBox,
   InterviewCreateBox,
+  ModalButton,
 } from './styled'
 import { MenuItem, Typography, useTheme } from '@mui/material'
 import useBooking from '@/hooks/useBooking'
@@ -26,7 +27,6 @@ const ApplyPage = ({ params }: { params: { id: string } }) => {
     bookings,
     handleNameChange,
     handleDateChange,
-    handleSubmit,
     delted_name,
     delted_date,
     handleDeleteClick,
@@ -36,7 +36,8 @@ const ApplyPage = ({ params }: { params: { id: string } }) => {
     isModalOpen2,
     handleEditClick,
     handleCancelModal2,
-    handleConfirmDelete2,
+    handleConfirmEdit,
+    handleDelDateChange,
   } = useBooking(id)
   const { allCompany } = useAllCompanyCard()
   const theme = useTheme()
@@ -141,36 +142,24 @@ const ApplyPage = ({ params }: { params: { id: string } }) => {
               width: '100%',
             }}
           >
-            <button
+            <ModalButton
               style={{
                 backgroundColor: theme.palette.secondary.dark,
                 color: theme.palette.text.secondary,
-                padding: '10px 14px',
-                borderRadius: '12px',
-                boxShadow: 'none',
-                border: 'none',
-                minWidth: '121px',
-                cursor: 'pointer',
               }}
               onClick={handleCancelModal}
             >
               Cancel
-            </button>
-            <button
+            </ModalButton>
+            <ModalButton
               style={{
                 backgroundColor: theme.palette.primary.main,
                 color: theme.palette.text.secondary,
-                padding: '10px 14px',
-                borderRadius: '12px',
-                boxShadow: 'none',
-                border: 'none',
-                minWidth: '121px',
-                cursor: 'pointer',
               }}
               onClick={handleConfirmDelete}
             >
               Confirm
-            </button>
+            </ModalButton>
           </div>
         </Modal>
 
@@ -178,40 +167,50 @@ const ApplyPage = ({ params }: { params: { id: string } }) => {
           <Typography variant="h5">
             Edit Booking Date at {delted_name}
           </Typography>
-          <label>New Interview Date :</label>
-          <DateField
-            format="DD-MM-YYYY"
-            sx={{
-              background: '#D9D9D9',
-              borderRadius: '12px',
-              padding: 0,
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '8px',
+              alignItems: 'center',
             }}
-            InputProps={{
-              sx: {
+          >
+            <label>New Interview Date :</label>
+            <DateField
+              format="DD-MM-YYYY"
+              sx={{
+                background: '#D9D9D9',
                 borderRadius: '12px',
-                backgroundColor: '#21212114',
-                '& ::-ms-reveal': {
-                  display: 'none',
-                },
-                '& ::-ms-clear': {
-                  display: 'none',
-                },
-                '.MuiInputBase-input.MuiOutlinedInput-input': {
-                  padding: '8.5px 14px',
-                },
                 padding: 0,
-              },
-            }}
-            InputLabelProps={{
-              sx: {
-                color: '#000000',
-                padding: 0,
-              },
-            }}
-            disablePast
-            value={dayjs(delted_date)}
-            onChange={handleDateChange}
-          />
+              }}
+              InputProps={{
+                sx: {
+                  borderRadius: '12px',
+                  backgroundColor: '#21212114',
+                  '& ::-ms-reveal': {
+                    display: 'none',
+                  },
+                  '& ::-ms-clear': {
+                    display: 'none',
+                  },
+                  '.MuiInputBase-input.MuiOutlinedInput-input': {
+                    padding: '8.5px 14px',
+                  },
+                  padding: 0,
+                },
+              }}
+              InputLabelProps={{
+                sx: {
+                  color: '#000000',
+                  padding: 0,
+                },
+              }}
+              disablePast
+              value={dayjs(delted_date)}
+              onChange={handleDelDateChange}
+            />
+          </div>
+
           <div
             style={{
               display: 'flex',
@@ -220,36 +219,24 @@ const ApplyPage = ({ params }: { params: { id: string } }) => {
               width: '100%',
             }}
           >
-            <button
+            <ModalButton
               style={{
                 backgroundColor: theme.palette.secondary.dark,
                 color: theme.palette.text.secondary,
-                padding: '10px 14px',
-                borderRadius: '12px',
-                boxShadow: 'none',
-                border: 'none',
-                minWidth: '121px',
-                cursor: 'pointer',
               }}
-              onClick={handleCancelModal}
+              onClick={handleCancelModal2}
             >
               Cancel
-            </button>
-            <button
+            </ModalButton>
+            <ModalButton
               style={{
                 backgroundColor: theme.palette.primary.main,
                 color: theme.palette.text.secondary,
-                padding: '10px 14px',
-                borderRadius: '12px',
-                boxShadow: 'none',
-                border: 'none',
-                minWidth: '121px',
-                cursor: 'pointer',
               }}
-              onClick={handleConfirmDelete}
+              onClick={handleConfirmEdit}
             >
               Confirm
-            </button>
+            </ModalButton>
           </div>
         </Modal>
       </LocalizationProvider>
