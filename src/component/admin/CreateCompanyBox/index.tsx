@@ -1,12 +1,13 @@
-"use client";
-import React, { useEffect } from "react";
-import { CreateCompanyContainer } from "./styled";
-import { Typography, useTheme } from "@mui/material";
-import TextField from "@/component/common/TextField";
-import useCreateCompany from "@/hooks/useCreateCompany";
+'use client'
+import React, { useEffect } from 'react'
+import { CreateCompanyContainer } from './styled'
+import { Typography, useTheme } from '@mui/material'
+import TextField from '@/component/common/TextField'
+import useCreateCompany from '@/hooks/useCreateCompany'
+import ApplyButton from '@/component/common/ApplyButton'
 
 const CreateCompanyBox = (props: { getAllCompany: () => {} }) => {
-  const { getAllCompany } = props;
+  const { getAllCompany } = props
   const {
     name,
     address,
@@ -24,23 +25,23 @@ const CreateCompanyBox = (props: { getAllCompany: () => {} }) => {
     handleProvinceChange,
     handleSubmit,
     success,
-  } = useCreateCompany();
+  } = useCreateCompany()
 
   useEffect(() => {
     if (success) {
-      getAllCompany();
+      getAllCompany()
     }
-  }, [success]);
+  }, [success])
 
-  const theme = useTheme();
+  const theme = useTheme()
   return (
     <CreateCompanyContainer>
-      <Typography variant="h6" sx={{ alignSelf: "center" }}>
+      <Typography variant="h6" sx={{ alignSelf: 'center' }}>
         New Company
       </Typography>
       <label>Company Name :</label>
       <TextField
-        sx={{ background: "#D9D9D9" }}
+        sx={{ background: '#D9D9D9' }}
         variant="outlined"
         className="field"
         value={name}
@@ -48,7 +49,7 @@ const CreateCompanyBox = (props: { getAllCompany: () => {} }) => {
       />
       <label>Business :</label>
       <TextField
-        sx={{ background: "#D9D9D9" }}
+        sx={{ background: '#D9D9D9' }}
         variant="outlined"
         className="field"
         value={business}
@@ -56,7 +57,7 @@ const CreateCompanyBox = (props: { getAllCompany: () => {} }) => {
       />
       <label>Address :</label>
       <TextField
-        sx={{ background: "#D9D9D9" }}
+        sx={{ background: '#D9D9D9' }}
         variant="outlined"
         className="field"
         value={address}
@@ -64,7 +65,7 @@ const CreateCompanyBox = (props: { getAllCompany: () => {} }) => {
       />
       <label>Province :</label>
       <TextField
-        sx={{ background: "#D9D9D9" }}
+        sx={{ background: '#D9D9D9' }}
         variant="outlined"
         className="field"
         value={province}
@@ -72,7 +73,7 @@ const CreateCompanyBox = (props: { getAllCompany: () => {} }) => {
       />
       <label>Postal code :</label>
       <TextField
-        sx={{ background: "#D9D9D9" }}
+        sx={{ background: '#D9D9D9' }}
         variant="outlined"
         className="field"
         value={postalcode}
@@ -80,7 +81,7 @@ const CreateCompanyBox = (props: { getAllCompany: () => {} }) => {
       />
       <label>Telephone No :</label>
       <TextField
-        sx={{ background: "#D9D9D9" }}
+        sx={{ background: '#D9D9D9' }}
         variant="outlined"
         className="field"
         value={tel}
@@ -88,31 +89,15 @@ const CreateCompanyBox = (props: { getAllCompany: () => {} }) => {
       />
       <label>Picture Link :</label>
       <TextField
-        sx={{ background: "#D9D9D9" }}
+        sx={{ background: '#D9D9D9' }}
         variant="outlined"
         className="field"
         value={picture}
         onChange={handlePictureChange}
       />
-      <button
-        style={{
-          backgroundColor: theme.palette.primary.dark,
-          color: theme.palette.text.secondary,
-          padding: "10px 14px",
-          borderRadius: "12px",
-          boxShadow: "none",
-          border: "none",
-          minWidth: "121px",
-          alignSelf: "center",
-          cursor: "pointer",
-          fontWeight: "bolder",
-        }}
-        onClick={handleSubmit}
-      >
-        CREATE
-      </button>
+      <ApplyButton onClick={handleSubmit}>CREATE</ApplyButton>
     </CreateCompanyContainer>
-  );
-};
+  )
+}
 
-export default CreateCompanyBox;
+export default CreateCompanyBox
