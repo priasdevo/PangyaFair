@@ -19,8 +19,8 @@ export const ContentContainer = styled("div")`
 export const CompanyCardContainer = styled("div")`
   display: flex;
   flex-direction: row;
-  gap: 15px;
+  gap: 45px;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 `;

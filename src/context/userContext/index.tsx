@@ -41,6 +41,8 @@ export const UserProvider = ({ children }: React.PropsWithChildren<{}>) => {
     if (token) validateToken();
     else {
       const nToken = localStorage.getItem("token");
+
+      console.log("Prias Meow : ", nToken);
       if (nToken) {
         setToken(nToken);
       } else {
@@ -52,7 +54,7 @@ export const UserProvider = ({ children }: React.PropsWithChildren<{}>) => {
   const logout = () => {
     setToken("");
     localStorage.removeItem("token");
-    setEmail("");
+    setEmail(" ");
     setIsLogin(false);
   };
 

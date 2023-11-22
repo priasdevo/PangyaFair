@@ -36,7 +36,7 @@ const Header = () => {
           justifyContent: "space-between",
         }}
       >
-        <img src="logo.png" width={45} height={45} />
+        <img src="/logo.png" width={45} height={45} />
         <SignInButton onClick={handleButtonClick}>
           {buttonText} {isLogin ? <LogoutIcon /> : <LoginIcon />}
         </SignInButton>

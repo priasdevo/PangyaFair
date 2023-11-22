@@ -1,5 +1,7 @@
 import { useApi } from "@/context/apiContext";
+import { revalidateTag } from "next/cache";
 import { useState } from "react";
+import { revalidTag } from "@/server_actions/revalidate";
 
 const useCreateCompany = () => {
   const [name, setName] = useState("");
@@ -9,6 +11,7 @@ const useCreateCompany = () => {
   const [postalcode, setPostalcode] = useState("");
   const [tel, setTel] = useState("");
   const [picture, setPicture] = useState("");
+  const [success, setSuccess] = useState(false);
   const { sendRequest } = useApi();
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +55,9 @@ const useCreateCompany = () => {
       picture,
     };
     try {
+      setSuccess(false);
       const data = await sendRequest("POST", req, "/api/v1/companies");
+      setSuccess(true);
     } catch (err) {
       console.log(err);
     }
@@ -74,6 +79,7 @@ const useCreateCompany = () => {
     handleTelChange,
     handleProvinceChange,
     handleSubmit,
+    success,
   };
 };
 

@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 import CreateCompanyBox from "@/component/admin/CreateCompanyBox";
 
 export default function Home() {
-  const { allCompany } = useAllCompanyCard();
+  const { allCompany, getAllCompany } = useAllCompanyCard();
   const { isLogin, role, loading } = useUser();
   const router = useRouter();
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function Home() {
               );
             })}
         </CompanyCardContainer>
-        {isAdmin && <CreateCompanyBox />}
+        {isAdmin && <CreateCompanyBox getAllCompany={getAllCompany} />}
       </ContentContainer>
     </HomeContainer>
   );

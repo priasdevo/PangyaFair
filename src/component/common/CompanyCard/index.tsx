@@ -3,6 +3,7 @@ import { ActionBar, CompanyCardContainer } from "./styled";
 import { Typography, useTheme } from "@mui/material";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import Link from "next/link";
 interface cardProps {
   isAdmin: boolean;
   companyName: string;
@@ -20,19 +21,22 @@ const CompanyCard = (props: cardProps) => {
         {companyName}
       </Typography>
       <ActionBar>
-        <button
-          style={{
-            backgroundColor: theme.palette.primary.dark,
-            color: theme.palette.text.secondary,
-            padding: "10px 14px",
-            borderRadius: "12px",
-            boxShadow: "none",
-            border: "none",
-            minWidth: "121px",
-          }}
-        >
-          Apply
-        </button>
+        <Link href={`/${companyId}`}>
+          <button
+            style={{
+              backgroundColor: theme.palette.primary.dark,
+              color: theme.palette.text.secondary,
+              padding: "10px 14px",
+              borderRadius: "12px",
+              boxShadow: "none",
+              border: "none",
+              minWidth: "121px",
+              cursor: "pointer",
+            }}
+          >
+            Apply
+          </button>
+        </Link>
         {isAdmin && (
           <ActionBar>
             <button style={{ borderRadius: "4px", height: "100%" }}>

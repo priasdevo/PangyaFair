@@ -13,7 +13,9 @@ const useAllCompanyCard = () => {
 
   async function getAllCompany() {
     try {
-      const response = await sendRequest("GET", {}, "/api/v1/companies");
+      const response = await sendRequest("GET", {}, "/api/v1/companies", [
+        "companies",
+      ]);
       console.log("Prias response : ", response);
       setAllCompany(response.data);
     } catch (err) {
@@ -24,7 +26,7 @@ const useAllCompanyCard = () => {
     getAllCompany();
   }, []);
 
-  return { allCompany };
+  return { allCompany, getAllCompany };
 };
 
 export default useAllCompanyCard;

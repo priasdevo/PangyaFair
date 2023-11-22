@@ -1,10 +1,12 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import { CreateCompanyContainer } from "./styled";
 import { Typography, useTheme } from "@mui/material";
 import TextField from "@/component/common/TextField";
 import useCreateCompany from "@/hooks/useCreateCompany";
 
-const CreateCompanyBox = () => {
+const CreateCompanyBox = (props: { getAllCompany: () => {} }) => {
+  const { getAllCompany } = props;
   const {
     name,
     address,
@@ -21,7 +23,15 @@ const CreateCompanyBox = () => {
     handleTelChange,
     handleProvinceChange,
     handleSubmit,
+    success,
   } = useCreateCompany();
+
+  useEffect(() => {
+    if (success) {
+      getAllCompany();
+    }
+  }, [success]);
+
   const theme = useTheme();
   return (
     <CreateCompanyContainer>
@@ -94,6 +104,7 @@ const CreateCompanyBox = () => {
           border: "none",
           minWidth: "121px",
           alignSelf: "center",
+          cursor: "pointer",
         }}
         onClick={handleSubmit}
       >
