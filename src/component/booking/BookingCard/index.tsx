@@ -9,17 +9,18 @@ interface BookingCardProps {
   date: Date
   id: string
   onDeleteClick: (delId: string, delName: string, delDate: Date) => void
+  onEditClick: (delId: string, delName: string, delDate: Date) => void
 }
 const BookingCard = (props: BookingCardProps) => {
-  const { name, date, id, onDeleteClick } = props
+  const { name, date, id, onDeleteClick, onEditClick } = props
   return (
     <BookingCardContainer>
       <Typography variant="h6">Company Name : {name}</Typography>
       <Typography variant="h6">
-        Interview Date : {dayjs(date).format('DD-MM-YYYY')}
+        Interview Date : {dayjs(date).format('DD/MM/YYYY')}
       </Typography>
       <ActionBar>
-        <ActionButton>
+        <ActionButton onClick={() => onEditClick(id, name, date)}>
           <BorderColorOutlinedIcon fontSize="medium" />
         </ActionButton>
         <ActionButton onClick={() => onDeleteClick(id, name, date)}>
