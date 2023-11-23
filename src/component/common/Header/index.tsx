@@ -19,7 +19,6 @@ const Header = () => {
 
   const handleButtonClick = () => {
     if (isLogin) {
-      console.log('PRias')
       logout()
     } else {
       router.push('/login')

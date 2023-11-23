@@ -4,6 +4,7 @@ import { useApi } from '@/context/apiContext'
 import { useEffect, useState } from 'react'
 import useCompanyDetails from './useCompanyDetails'
 import dayjs from 'dayjs'
+import { useSnackbar } from '@/context/snackbarContext'
 
 interface booking {
   _id: string
@@ -26,6 +27,7 @@ const useBooking = (id?: string) => {
   const [delete_id, setDeleteId] = useState('')
   const [delted_name, setDeletedName] = useState('')
   const [delted_date, setDeletedDate] = useState<Date>()
+  const { displaySnackbar } = useSnackbar()
 
   const { sendRequest } = useApi()
 
@@ -44,7 +46,9 @@ const useBooking = (id?: string) => {
   async function getBookings() {
     try {
       const response = await sendRequest('GET', {}, '/api/v1/bookings')
-      setBookings(response.data)
+      if (response.success) {
+        setBookings(response.data)
+      }
     } catch (err) {
       console.log(err)
     }
@@ -74,6 +78,8 @@ const useBooking = (id?: string) => {
       )
       if (response.success) {
         getBookings()
+      } else {
+        displaySnackbar(response.message, 'error')
       }
     } catch (err) {
       console.log(err)
@@ -123,7 +129,6 @@ const useBooking = (id?: string) => {
     setDeletedName(delName)
     setDeletedDate(delDate)
     setIsModalOpen2(true)
-    console.log('PRias testing is real')
   }
 
   const handleCancelModal = () => {

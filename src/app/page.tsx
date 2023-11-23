@@ -49,9 +49,6 @@ export default function Home() {
     }
   }, [isLogin, loading])
   useEffect(() => {
-    console.log('Prias allcompany : ', allCompany)
-  }, [allCompany])
-  useEffect(() => {
     if (success) {
       getAllCompany()
     }

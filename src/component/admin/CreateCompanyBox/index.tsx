@@ -1,11 +1,10 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { CreateCompanyContainer } from './styled'
-import { FormControl, Typography, useTheme } from '@mui/material'
+import { FormControl, Typography } from '@mui/material'
 import TextField from '@/component/common/TextField'
 import useCreateCompany from '@/hooks/useCreateCompany'
 import ApplyButton from '@/component/common/ApplyButton'
-import Modal from '@/component/common/Modal'
 
 const CreateCompanyBox = (props: { getAllCompany: () => {} }) => {
   const { getAllCompany } = props
@@ -34,7 +33,6 @@ const CreateCompanyBox = (props: { getAllCompany: () => {} }) => {
 
   // Modified submit handler
   const handleFormSubmitM = (e) => {
-    console.log('Prias submit click')
     e.preventDefault()
     handleFormSubmit(formData) // Assuming handleSubmit can take formData as argument
   }

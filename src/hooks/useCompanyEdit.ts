@@ -79,7 +79,6 @@ const useCompanyEdit = () => {
 
   const handleChangeEdit = (e) => {
     const { name, value } = e.target
-    console.log('Prias change')
     setFormDataEdit((prevState) => ({ ...prevState, [name]: value }))
   }
 
