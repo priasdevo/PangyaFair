@@ -95,7 +95,7 @@ const ApplyPage = () => {
                 </TextField>
                 <label>Interview Date :</label>
                 <DateField
-                  format="DD-MM-YYYY"
+                  format="DD/MM/YYYY"
                   sx={{
                     background: '#D9D9D9',
                     borderRadius: '12px',
@@ -130,7 +130,7 @@ const ApplyPage = () => {
               </InterviewCreateBox>
               <ApplyButton
                 onClick={handleSubmit}
-                isDisabled={bookings.length >= 3}
+                isDisabled={bookings.length >= 3 && role !== 'admin'}
               >
                 APPLY
               </ApplyButton>
@@ -185,7 +185,7 @@ const ApplyPage = () => {
           >
             <label>New Interview Date :</label>
             <DateField
-              format="DD-MM-YYYY"
+              format="DD/MM/YYYY"
               sx={{
                 background: '#D9D9D9',
                 borderRadius: '12px',

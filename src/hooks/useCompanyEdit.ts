@@ -3,6 +3,7 @@
 import { useApi } from '@/context/apiContext'
 import { useEffect, useState } from 'react'
 import useCompanyDetails from './useCompanyDetails'
+import { useSnackbar } from '@/context/snackbarContext'
 
 const useCompanyEdit = () => {
   const [formDataEdit, setFormDataEdit] = useState({
@@ -19,6 +20,7 @@ const useCompanyEdit = () => {
   const [isOpen, setIsOpen] = useState(false)
   const { sendRequest } = useApi()
   const { company, getCompany } = useCompanyDetails()
+  const { displaySnackbar } = useSnackbar()
   const fromDataFields = [
     { label: 'Company Name', name: 'name' },
     { label: 'Business', name: 'business' },
@@ -71,6 +73,10 @@ const useCompanyEdit = () => {
     try {
       setSuccess(false)
       const data = await sendRequest('PUT', req, '/api/v1/companies/' + id)
+      if (!data.success) {
+        // displaySnackbar(data.message, 'error')
+        displaySnackbar('Edit Company Failed', 'error')
+      }
       setSuccess(true)
     } catch (err) {
       console.log(err)
