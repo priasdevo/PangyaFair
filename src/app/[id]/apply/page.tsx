@@ -38,6 +38,7 @@ const ApplyPage = ({ params }: { params: { id: string } }) => {
     handleCancelModal2,
     handleConfirmEdit,
     handleDelDateChange,
+    handleSubmit,
   } = useBooking(id)
   const { allCompany } = useAllCompanyCard()
   const theme = useTheme()
@@ -124,8 +125,12 @@ const ApplyPage = ({ params }: { params: { id: string } }) => {
                   onChange={handleDateChange}
                 />
               </InterviewCreateBox>
-
-              <ApplyButton>APPLY</ApplyButton>
+              <ApplyButton
+                onClick={handleSubmit}
+                isDisabled={bookings.length >= 3}
+              >
+                APPLY
+              </ApplyButton>
             </InterviewBookBox>
           )}
         </ApplyPageContainer>
