@@ -20,8 +20,8 @@ import ApplyButton from '@/component/common/ApplyButton'
 import dayjs from 'dayjs'
 import { useUser } from '@/context/userContext'
 
-const ApplyPage = ({ params }: { params: { id: string } }) => {
-  const id = params.id
+const ApplyPage = () => {
+  const id = false
   const {
     name,
     date,
@@ -40,7 +40,7 @@ const ApplyPage = ({ params }: { params: { id: string } }) => {
     handleConfirmEdit,
     handleDelDateChange,
     handleSubmit,
-  } = useBooking(id)
+  } = useBooking()
   const { role } = useUser()
   const { allCompany } = useAllCompanyCard()
   const theme = useTheme()
@@ -67,7 +67,7 @@ const ApplyPage = ({ params }: { params: { id: string } }) => {
                 )
               })}
           </BookingBox>
-          {name && (
+          {(name || !id) && (
             <InterviewBookBox>
               <InterviewCreateBox>
                 <Typography variant="h4" sx={{ alignSelf: 'center' }}>

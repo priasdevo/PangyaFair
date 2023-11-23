@@ -6,6 +6,7 @@ import LoginIcon from '@mui/icons-material/Login'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { useRouter } from 'next/navigation'
 import { useUser } from '@/context/userContext'
+import Link from 'next/link'
 
 const Header = () => {
   const { isLogin, loading, logout, email } = useUser()
@@ -36,9 +37,29 @@ const Header = () => {
           justifyContent: 'space-between',
         }}
       >
-        <a href="/">
-          <img src="/logo.png" width={45} height={45} />
-        </a>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: '32px',
+          }}
+        >
+          <a href="/">
+            <img src="/logo.png" width={45} height={45} />
+          </a>
+          {isLogin && (
+            <Link href={'/apply'}>
+              <Typography
+                variant="h6"
+                sx={{ color: 'black', textDecoration: 'underline' }}
+              >
+                {'Apply for Interview'}
+              </Typography>
+            </Link>
+          )}
+        </div>
+
         <div
           style={{
             display: 'flex',

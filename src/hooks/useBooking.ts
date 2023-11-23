@@ -17,7 +17,7 @@ interface booking {
   }
 }
 
-const useBooking = (id: string) => {
+const useBooking = (id?: string) => {
   const [name, setName] = useState('')
   const [date, setDate] = useState<Date>()
   const [bookings, setBookings] = useState<booking[]>([])
