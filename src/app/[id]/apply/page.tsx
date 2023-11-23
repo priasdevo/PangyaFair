@@ -18,6 +18,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import Modal from '@/component/common/Modal'
 import ApplyButton from '@/component/common/ApplyButton'
 import dayjs from 'dayjs'
+import { useUser } from '@/context/userContext'
 
 const ApplyPage = ({ params }: { params: { id: string } }) => {
   const id = params.id
@@ -40,6 +41,7 @@ const ApplyPage = ({ params }: { params: { id: string } }) => {
     handleDelDateChange,
     handleSubmit,
   } = useBooking(id)
+  const { role } = useUser()
   const { allCompany } = useAllCompanyCard()
   const theme = useTheme()
 
@@ -58,6 +60,7 @@ const ApplyPage = ({ params }: { params: { id: string } }) => {
                     name={booking.company.name}
                     date={booking.bookingDate}
                     id={booking._id}
+                    user={role === 'admin' ? booking.user.email : null}
                     onDeleteClick={handleDeleteClick}
                     onEditClick={handleEditClick}
                   />

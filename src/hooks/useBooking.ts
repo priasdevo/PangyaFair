@@ -11,6 +11,10 @@ interface booking {
   company: {
     name: string
   }
+  user: {
+    name: string
+    email: string
+  }
 }
 
 const useBooking = (id: string) => {
